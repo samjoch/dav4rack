@@ -470,13 +470,13 @@ module DAV4Rack
     def xml_convert(xml, element)
       if element.children.empty?
         if element.text?
-          xml.send(element.name, element.text, element.attributes)
+          xml.send(element.name, element.text)
         else
           xml.send(element.name, element.attributes)
         end
       else
         xml.send(element.name, element.attributes) do
-          element.elements.each do |child|
+          element.children.each do |child|
             xml_convert(xml, child)
           end
         end
